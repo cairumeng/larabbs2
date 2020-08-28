@@ -22,6 +22,7 @@
 </head>
 
 <body>
+
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -56,10 +57,14 @@
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
+                                <img src="{{Auth::user()->avatar}}" alt="avatar" style="height:32px;">
+
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{route('users.show',Auth::user())}}">Profile Center</a>
+                                <a class="dropdown-item" href="{{route('users.edit',Auth::user())}}">Edit Profile</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -76,7 +81,7 @@
             </div>
         </nav>
 
-        <main class="container text-center">
+        <main class="container">
             @yield('content')
         </main>
     </div>
