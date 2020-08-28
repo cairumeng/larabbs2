@@ -28,7 +28,6 @@ class ImageUploadHelper
 
             $this->reduceSize($upload_path . '/' . $filename, $max_width);
         }
-
         return [
             'path' => config('app.url') . "/$folder_name/$filename"
         ];

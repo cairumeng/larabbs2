@@ -6,7 +6,8 @@
             <img src="{{$user->avatar}}" class="card-img-top" alt="default_avatar">
             <div class="card-body">
                 <h5 class="card-title">Self Introduction</h5>
-                <p class="card-text">{{$user->introduction}}</p>
+                <p class="card-text">
+                    {{$user->introduction?:'You have not writen your introduction yet!'}}</p>
                 <hr>
                 <h5 class="card-title">Created at</h5>
                 <p class="card-text">{{$user->created_at->diffForHumans()}}</p>
