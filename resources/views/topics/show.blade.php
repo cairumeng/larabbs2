@@ -36,9 +36,13 @@
                 <a href="{{route('topics.edit',$topic)}}" class="btn btn-light btn-xs">
                     <i class="glyphicon glyphicon-edit"></i> Edit
                 </a>
-                <a href="{{route('topics.destroy',$topic)}}" class="btn btn-light btn-xs">
-                    <i class="glyphicon glyphicon-trash"></i> Delete
-                </a>
+                <form action="{{route('topics.destroy',$topic->id)}}" method="POST" class="d-inline">
+                    @csrf
+                    @method('Delete')
+                    <button href="" class="btn btn-light btn-xs">
+                        <i class="glyphicon glyphicon-trash"></i> Delete
+                    </button>
+                </form>
             </div>
         </div>
     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Topic;
 use App\Models\Category;
 use App\Models\User;
+use App\Observers\TopicObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,5 +42,11 @@ class TopicsController extends Controller
     {
         $topic->update($request->all());
         return redirect()->route('topics.show', ['topic' => $topic])->with('success', 'Updated Successfully');
+    }
+
+    public function destroy(Topic $topic)
+    {
+        $topic->delete();
+        return  redirect()->route('home')->with('success', 'You have deleted a topic!');
     }
 }
