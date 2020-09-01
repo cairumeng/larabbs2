@@ -33,10 +33,10 @@
                     </span> </div>
                 <div class="mt-5">{!!$topic->body!!}</div>
                 <hr>
-                <a href="{{route('topics.edit',$topic->id)}}" class="btn btn-light btn-xs">
+                <a href="{{route('topics.edit',$topic)}}" class="btn btn-light btn-xs">
                     <i class="glyphicon glyphicon-edit"></i> Edit
                 </a>
-                <a href="{{route('topics.destroy',$topic->id)}}" class="btn btn-light btn-xs">
+                <a href="{{route('topics.destroy',$topic)}}" class="btn btn-light btn-xs">
                     <i class="glyphicon glyphicon-trash"></i> Delete
                 </a>
             </div>

@@ -18,6 +18,7 @@ class TopicsController extends Controller
 
     public function store(Request $request, Topic $topic)
     {
+
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
         $topic->save();
@@ -32,6 +33,13 @@ class TopicsController extends Controller
 
     public function Edit(Topic $topic)
     {
-        return view('topics.edit', compact($topic));
+        $categories = Category::all();
+        return view('topics.edit', compact('topic', 'categories'));
+    }
+
+    public function update(Request $request, Topic $topic)
+    {
+        $topic->update($request->all());
+        return redirect()->route('topics.show', ['topic' => $topic])->with('success', 'Updated Successfully');
     }
 }

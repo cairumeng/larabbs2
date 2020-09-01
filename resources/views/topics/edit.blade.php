@@ -7,7 +7,6 @@
         height: 250px;
     }
 </style>
-
 @stop
 @section('content')
 <div class="row">
@@ -15,11 +14,12 @@
         <div class="card mt-5 mr-auto ">
             <div class="card-header">
                 <i class="fas fa-edit"></i>
-                Create topic
+                Edit topic
             </div>
             <div class="card-body">
-                <form method="POST" action="{{route('topics.store')}}">
+                <form method="POST" action="{{route('topics.update',$topic->id)}}">
                     @csrf
+                    @method('patch')
                     @include('topics._create_edit_form')
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
