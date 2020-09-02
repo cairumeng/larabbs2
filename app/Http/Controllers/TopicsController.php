@@ -40,12 +40,14 @@ class TopicsController extends Controller
 
     public function update(Request $request, Topic $topic)
     {
+        $this->authorize('update', $topic);
         $topic->update($request->all());
         return redirect()->route('topics.show', ['topic' => $topic])->with('success', 'Updated Successfully');
     }
 
     public function destroy(Topic $topic)
     {
+        $this->authorize('destroy', $topic);
         $topic->delete();
         return  redirect()->route('home')->with('success', 'You have deleted a topic!');
     }
