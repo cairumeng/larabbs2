@@ -19,5 +19,5 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users', 'UsersController')->only(['show', 'edit', 'update']);
-Route::resource('topics', 'TopicsController')->only(['create', 'store', 'show', 'edit', 'update', 'destroy']);
+Route::resource('topics', 'TopicsController')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 Route::post('images', 'ImagesController@store')->name('images.store');

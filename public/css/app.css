@@ -10908,3 +10908,17 @@ a.text-dark:focus {
   }
 }
 
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.topic-avatar {
+  height: 52px;
+  width: 52px;
+}
+
+.badge {
+  background-color: #d8d8d8;
+}
+

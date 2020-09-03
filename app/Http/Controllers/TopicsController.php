@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class TopicsController extends Controller
 {
+
+    public function index()
+    {
+        $topics = Topic::with('user', 'category')->latest()->paginate(20);
+        return view('topics.index', compact('topics'));
+    }
+
     public function create()
     {
         $categories = Category::all();
