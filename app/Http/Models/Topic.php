@@ -19,4 +19,21 @@ class Topic extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function scopeWithOrder($query, $order)
+    {
+        switch ($order) {
+            case 'recent':
+                $query->recent();
+                break;
+            default:
+                $query->latest();
+                break;
+        }
+    }
+
+    public function scopeRecent($query)
+    {
+        return $query->orderBy('updated_at', 'desc');
+    }
 }

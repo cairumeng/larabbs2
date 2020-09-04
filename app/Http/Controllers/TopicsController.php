@@ -4,17 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Topic;
 use App\Models\Category;
-use App\Models\User;
-use App\Observers\TopicObserver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TopicsController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $topics = Topic::with('user', 'category')->latest()->paginate(20);
+        $topics = Topic::withOrder($request->order)->paginate(20);
         return view('topics.index', compact('topics'));
     }
 
