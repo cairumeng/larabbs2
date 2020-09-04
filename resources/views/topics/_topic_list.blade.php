@@ -21,7 +21,9 @@
                             <div class="badge float-right"> {{ $topic->reply_count }} </div>
 
                         </div>
-                        <i class="fas fa-folder"></i> {{$topic->category->name}}
+                        <a href="{{route('categories.topics',$topic->category)}}" class="">
+                            <i class="fas fa-folder"></i> {{$topic->category->name}}
+                        </a>
                         <i class="fas fa-user ml-3"></i>{{$topic->user->name}}
                         <i class="far fa-clock ml-3 "></i>{{$topic->updated_at->diffForHumans()}}
                     </div>

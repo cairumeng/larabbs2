@@ -21,3 +21,4 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::resource('users', 'UsersController')->only(['show', 'edit', 'update']);
 Route::resource('topics', 'TopicsController')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 Route::post('images', 'ImagesController@store')->name('images.store');
+Route::get('/categories/{category}/topics', 'CategoriesController@topics')->name('categories.topics');
