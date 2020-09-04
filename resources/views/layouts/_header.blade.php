@@ -12,11 +12,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="ml-2"><a href="{{route('topics.index')}}">Topics</a></li>
-                    <li class="ml-2"><a href="{{route('categories.topics',1)}}">Share</a></li>
-                    <li class="ml-2"><a href="{{route('categories.topics',2)}}">Course</a></li>
-                    <li class="ml-2"><a href="{{route('categories.topics',3)}}">Q&A</a></li>
-                    <li class="ml-2"><a href="{{route('categories.topics',4)}}">Annoucement</a></li>
+                    <li class="nav-item {{active_class(if_route('topics.index'))}}"><a class="nav-link"
+                            href="{{route('topics.index')}}">Topics</a></li>
+                    <li
+                        class="nav-item  {{active_class(if_route('categories.topics') && if_route_param('category',1))}}">
+                        <a class="nav-link" href="{{route('categories.topics',1)}}">Share</a></li>
+                    <li
+                        class="nav-item  {{active_class(if_route('categories.topics') && if_route_param('category',2))}}">
+                        <a class="nav-link" href="{{route('categories.topics',2)}}">Course</a></li>
+                    <li
+                        class="nav-item  {{active_class(if_route('categories.topics') && if_route_param('category',3))}}">
+                        <a class="nav-link" href="{{route('categories.topics',3)}}">Q&A</a></li>
+                    <li
+                        class="nav-item  {{active_class(if_route('categories.topics') && if_route_param('category',4))}}">
+                        <a class="nav-link" href="{{route('categories.topics',4)}}">Annoucement</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
