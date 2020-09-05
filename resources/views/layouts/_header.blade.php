@@ -50,11 +50,15 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{route('users.show',Auth::user())}}">Profile Center</a>
-                            <a class="dropdown-item" href="{{route('users.edit',Auth::user())}}">Edit Profile</a>
+                            <a class="dropdown-item" href="{{route('users.show',Auth::user())}}">
+                                <i class="fas fa-user mr-2"></i>
+                                Profile Center</a>
+                            <a class="dropdown-item" href="{{route('users.edit',Auth::user())}}">
+                                <i class="fas fa-edit mr-2"></i>Edit Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
+                                <i class="fas fa-sign-out-alt mr-2"></i>
                                 {{ __('Logout') }}
                             </a>
 

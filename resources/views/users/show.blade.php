@@ -24,8 +24,16 @@
             </div>
         </div>
         <div class="card mt-5">
-            <div class="card-body mr-auto">
-                <h5>no data...</h5>
+            <div class="card-body">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">{{$user->name}}'s topics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">{{$user->name}}'s replies</a>
+                    </li>
+                </ul>
+                @include('users._topics',['topics'=>$user->topics()->latest()->paginate(5)])
             </div>
         </div>
     </div>
