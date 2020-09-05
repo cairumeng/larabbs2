@@ -16,10 +16,10 @@ class TopicsController extends Controller
         return view('topics.index', compact('topics'));
     }
 
-    public function create()
+    public function create(Topic $topic)
     {
         $categories = Category::all();
-        return view('topics.create', compact('categories'));
+        return view('topics.create', compact('categories', 'topic'));
     }
 
     public function store(Request $request, Topic $topic)
