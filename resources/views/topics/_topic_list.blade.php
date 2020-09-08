@@ -2,10 +2,10 @@
     <div class="card-header">
         <ul class="nav">
             <li class="nav-item {{ active_class(!if_query('order','recent'))}}">
-                <a class="nav-link" href="{{Request::url()}}?order=default">Last reply</a>
+                <a class="nav-link" href="{{route('topics.index')}}?order=default">Last reply</a>
             </li>
             <li class="nav-item {{active_class(if_query('order','recent'))}}">
-                <a class="nav-link" href="{{Request::url()}}?order=recent">Latest topic</a>
+                <a class="nav-link" href="{{route('topics.index')}}?order=recent">Latest topic</a>
             </li>
         </ul>
     </div>
@@ -29,7 +29,8 @@
                         <a href="{{route('users.show',$topic->user)}}" class="">
                             <i class="fas fa-user ml-3"></i>{{$topic->user->name}}
                         </a>
-                        <i class="far fa-clock ml-3 "></i>{{$topic->updated_at->diffForHumans()}}
+                        <i class="far fa-clock ml-3 "></i>Created at:{{$topic->created_at->diffForHumans()}}
+                        <i class="far fa-clock ml-3 "></i>Updated at:{{$topic->updated_at->diffForHumans()}}
                     </div>
                 </div>
             </li>

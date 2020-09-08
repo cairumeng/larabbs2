@@ -32,12 +32,17 @@ class Topic extends Model
                 $query->recent();
                 break;
             default:
-                $query->latest();
+                $query->last();
                 break;
         }
     }
 
     public function scopeRecent($query)
+    {
+        return $query->orderBy('created_at', 'desc');
+    }
+
+    public function scopeLast($query)
     {
         return $query->orderBy('updated_at', 'desc');
     }
