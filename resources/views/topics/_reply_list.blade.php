@@ -12,6 +12,7 @@
                         <div>
                             <span>{{$reply->user->name}}</span>
                             <small><i class="far fa-clock ml-3 "></i>{{$reply->created_at->diffForHumans()}}</small>
+                            @can('destroy',$reply)
                             <form method="POST" action="{{route('replies.destroy',$reply->id)}}"
                                 onclick="return confirm('Are you sure?')" class="float-right">
                                 @csrf
@@ -19,6 +20,7 @@
                                 <button type="submit" class="btn btn-default btn-xs"><i
                                         class="fas fa-trash "></i></button>
                             </form>
+                            @endcan
                         </div>
                         <div>
                             {!!$reply->content!!}
