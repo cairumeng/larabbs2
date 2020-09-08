@@ -18,7 +18,7 @@
                     <div class="media-body">
                         <div class="">
                             <div class="mt-0 d-inline">
-                                {{$topic->title}}
+                                <a href="{{route('topics.show',$topic)}}" class="">{{$topic->title}}</a>
                             </div>
                             <div class="badge float-right"> {{ $topic->reply_count}} </div>
 
@@ -26,7 +26,9 @@
                         <a href="{{route('categories.topics',$topic->category)}}" class="">
                             <i class="fas fa-folder"></i> {{$topic->category->name}}
                         </a>
-                        <i class="fas fa-user ml-3"></i>{{$topic->user->name}}
+                        <a href="{{route('users.show',$topic->user)}}" class="">
+                            <i class="fas fa-user ml-3"></i>{{$topic->user->name}}
+                        </a>
                         <i class="far fa-clock ml-3 "></i>{{$topic->updated_at->diffForHumans()}}
                     </div>
                 </div>
