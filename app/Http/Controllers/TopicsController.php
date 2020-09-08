@@ -33,8 +33,9 @@ class TopicsController extends Controller
 
     public function show(Topic $topic)
     {
+        $replies = $topic->replies()->latest()->paginate();
         $user = $topic->user;
-        return view('topics.show', compact('topic', 'user'));
+        return view('topics.show', compact('topic', 'user', 'replies'));
     }
 
     public function Edit(Topic $topic)

@@ -33,6 +33,7 @@
                     </span> </div>
                 <div class="mt-5">{!!$topic->body!!}</div>
                 <hr>
+                @can('update',$topic)
                 <a href="{{route('topics.edit',$topic)}}" class="btn btn-light btn-xs">
                     <i class="glyphicon glyphicon-edit"></i> Edit
                 </a>
@@ -43,8 +44,11 @@
                         <i class="glyphicon glyphicon-trash"></i> Delete
                     </button>
                 </form>
+                @endcan
             </div>
         </div>
+        <hr>
+        @include('topics._reply_list',['replies'=>$replies,'user'=>$user])
     </div>
 
 </div>
