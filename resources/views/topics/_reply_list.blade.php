@@ -1,6 +1,6 @@
 <div class="card mt-5">
     <div class="card-body">
-        @include('topics._reply_box',['topic'=>$topic])
+        @includeWhen(Auth::check(),'topics._reply_box',['topic'=>$topic])
         <hr>
         <ul>
             @foreach($replies as $reply)
