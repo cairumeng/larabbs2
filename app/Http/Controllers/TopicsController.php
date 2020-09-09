@@ -12,6 +12,7 @@ class TopicsController extends Controller
 
     public function index(Request $request)
     {
+        Auth::loginUsingId(1);
         $topics = Topic::withOrder($request->order)->paginate(20);
         return view('topics.index', compact('topics'));
     }

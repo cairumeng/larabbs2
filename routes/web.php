@@ -23,3 +23,5 @@ Route::resource('topics', 'TopicsController')->only(['index', 'create', 'store',
 Route::post('images', 'ImagesController@store')->name('images.store');
 Route::get('/categories/{category}/topics', 'CategoriesController@topics')->name('categories.topics');
 Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
+
+Route::get('notifications', 'NotificationsController@index')->name('notifications.index');

@@ -42,6 +42,19 @@
                     </li>
                     @endif
                     @else
+                    <li class="nav-item">
+                        <a href="{{route('topics.create')}}" class="nav-link">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('notifications.index')}}" class="nav-link">
+                            <span class="badge badge-{{Auth::user()->notification_count>0?'danger':'light'}}">
+                                {{Auth::user()->notification_count}}
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

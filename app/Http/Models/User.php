@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'introduction', 'avatar', 'created_at', 'updated_at'
+        'name', 'email', 'password', 'introduction', 'avatar', 'created_at', 'updated_at', 'notification_count'
     ];
 
     /**
@@ -40,5 +40,14 @@ class User extends Authenticatable
     public function topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+    public function messageNotify($message)
+    {
+        if ($this->id === Auth::id()) {
+            return;
+        }
+        $this->increment('notification_count');
+        $this->notify($message);
     }
 }

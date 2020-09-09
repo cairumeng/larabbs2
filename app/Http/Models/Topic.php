@@ -49,7 +49,12 @@ class Topic extends Model
 
     public function updateReplyCount()
     {
-        $this->reply_count = $this->replies->count();
+        $this->reply_count = $this->replies()->count();
         $this->save();
+    }
+
+    public function link($params = [])
+    {
+        return route('topics.show', array_merge([$this->id], $params));
     }
 }
