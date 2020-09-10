@@ -12,7 +12,6 @@ class NotificationsController extends Controller
         $notifications = $user->unreadNotifications;
         $notifications->markAsRead();
         $user->update(['notification_count' => 0]);
-
         return view('notifications.index', compact('notifications'));
     }
 }
