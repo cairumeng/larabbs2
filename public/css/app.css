@@ -10928,3 +10928,26 @@ a.text-dark:focus {
   border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.main-box {
+  border: solid 3px whitesmoke;
+  box-shadow: 5px 5px 5px whitesmoke;
+  margin-top: 15px;
+}
+
+.management-box {
+  margin-top: 15px;
+}
+
+.management-box .card {
+  background-color: #c9b990;
+  padding: auto 5px;
+}
+
+.management-box form {
+  padding: 15px;
+}
+
+.display-none {
+  display: none;
+}
+

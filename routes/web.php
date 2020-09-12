@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::resource('users', 'UsersController')->only(['show', 'edit', 'update']);
+Route::resource('users', 'UsersController')->only(['show', 'edit', 'update', 'destroy']);
 Route::resource('topics', 'TopicsController')->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 Route::post('images', 'ImagesController@store')->name('images.store');
 Route::get('/categories/{category}/topics', 'CategoriesController@topics')->name('categories.topics');
 Route::resource('replies', 'RepliesController')->only(['store', 'destroy']);
 
 Route::get('notifications', 'NotificationsController@index')->name('notifications.index');
+
+Route::get('admin/users', 'AdminController@users')->name('admin.users');
