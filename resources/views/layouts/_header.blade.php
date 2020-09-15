@@ -64,7 +64,7 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             @can('manage_contents')
-                            <a class="dropdown-item" href="{{route('admin.users')}}">
+                            <a class="dropdown-item" href="{{route('admin.users.index')}}">
                                 <i class="fas fa-users-cog"></i>
                                 Admin</a>
                             @endcan

@@ -12,11 +12,16 @@
         <section id="admin-tool-bar" class="mt-5 mb-2">
             <ul class="nav">
                 <li class="nav-item active">
-                    <button class="btn btn-secondary btn-sm">
-                        <i class="far fa-trash-alt"></i>
-
-                        Mass delete
-                    </button>
+                    <form action="{{route('admin.users.destroy')}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-secondary btn-sm" id="mass_delete_btn"
+                            onclick="return confirm('Are you sure you want to delete these users?')">
+                            <i class="far fa-trash-alt"></i>
+                            Mass delete
+                        </button>
+                        <input type="hidden" name="user_ids" value="" id="user_ids">
+                    </form>
                 </li>
                 <li class="nav-item ml-4">
                     <div class="mt-1">Current pages: {{$users->currentPage()}}/{{$users->lastPage()}}</div>
@@ -40,19 +45,25 @@
             <tbody>
                 @foreach($users as $user)
                 <tr>
-                    <td><input type="checkbox" name="user" value="{{$user->id}}"></td>
+                    <td><input type="checkbox" name="user" value="{{$user->id}}" class="selected-ids"></td>
                     <th scope="row">{{$user->id}}</th>
-
                     <td><a href="{{route('users.show',$user)}}"><img src="{{$user->avatar}}" alt="avatar"
                                 class="topic-avatar img-thumbnail"></a></td>
                     <td><a href="{{route('users.show',$user)}}">{{$user->name}}</a></td>
                     <td>{{$user->email}}</td>
                     <td>
-                        <i class="far fa-edit text-success edit_btn " data-user="{{json_encode($user->toArray())}}"></i>
-                        <form method="POST" action="{{route('users.destroy',$user->id)}}" class="d-inline">
+                        <button class="btn edit_btn" data-user="{{json_encode($user->toArray())}}">
+                            <i class="far fa-edit text-success"></i>
+                        </button>
+
+                        <form method="POST" action="{{route('admin.users.destroy', ['user_ids'=>$user->id])}}"
+                            class="d-inline">
                             @csrf
-                            @method('delete')
-                            <i class="far fa-trash-alt text-danger"></i>
+                            @method('DELETE')
+                            <button class="btn" type="submit"
+                                onclick="return confirm('Are you sure you want to delete this user?')">
+                                <i class="far fa-trash-alt text-danger"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -78,29 +89,42 @@
     var editPanel = $('#edit_panel')
     var filterPanel = $('#filter_panel')
 
-    console.log($('.edit_btn'))
     $('.edit_btn').click(function () {
-        var userId = $(this).data('user')
-        // send axios request to fetch 
-        console.log('edit', userId, editPanel)
+        var user = $(this).data('user')
         createPanel.hide()
         filterPanel.hide()
         editPanel.show()
+        console.log(user)
+        $('#avatar').attr('src', user.avatar)
+        $('#email').val(user.email)
+        $('#name').val(user.name)
+        $('#introduction').val(user.introduction)
+        $('#edit_form').attr('action', '/admin/users/' + user.id)
     })
 
     createButton.click(function () {
-        console.log('create', createPanel)
         editPanel.hide()
         filterPanel.hide()
         createPanel.show()
     })
 
     filterButton.click(function () {
-        console.log('filter', filterPanel)
         editPanel.hide()
         createPanel.hide()
         filterPanel.show()
     })
 
+    var selectedIds = []
+
+    $('.selected-ids').change(function (e) {
+        if ($(this).is(":checked")) {
+            selectedIds.push($(this).val())
+        } else {
+            var selectedId = $(this).val()
+            selectedIds = selectedIds.filter(function (id) { return id !== selectedId })
+        }
+
+        $('#user_ids').val(selectedIds.join('_'))
+    })
 </script>
 @endsection

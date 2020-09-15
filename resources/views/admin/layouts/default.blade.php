@@ -40,6 +40,7 @@
             </ul>
     </nav>
     <main class="container">
+        @include('shared._messages')
         @yield('content')
     </main>
     </div>
