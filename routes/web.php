@@ -31,4 +31,7 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::post('users', 'UsersController@show')->name('users.show');
     Route::patch('users/{user}', 'UsersController@update')->name('users.update');
     Route::delete('users', 'UsersController@destroy')->name('users.destroy');
+    Route::get('roles', 'RolesController@index')->name('roles.index');
+    Route::post('roles', 'RolesController@store')->name('roles.store');
+    Route::get('permissions', 'PermissionsController@index')->name('permissions.index');
 });

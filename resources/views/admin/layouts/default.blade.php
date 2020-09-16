@@ -32,8 +32,8 @@
                         Users & Permissions
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Users</a>
-                        <a class="dropdown-item" href="#">Roles</a>
+                        <a class="dropdown-item" href="{{route('admin.users.index')}}">Users</a>
+                        <a class="dropdown-item" href="{{route('admin.roles.index')}}">Roles</a>
                         <a class="dropdown-item" href="#">Permissions</a>
                     </div>
                 </li>
