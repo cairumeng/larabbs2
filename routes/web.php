@@ -33,5 +33,6 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::delete('users', 'UsersController@destroy')->name('users.destroy');
     Route::get('roles', 'RolesController@index')->name('roles.index');
     Route::post('roles', 'RolesController@store')->name('roles.store');
+    Route::post('roles/search', 'RolesController@show')->name('roles.show');
     Route::get('permissions', 'PermissionsController@index')->name('permissions.index');
 });
