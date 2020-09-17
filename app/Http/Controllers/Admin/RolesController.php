@@ -41,4 +41,25 @@ class RolesController extends Controller
         $roles = $query->paginate(20);
         return view('admin.roles.roles', compact('roles', 'permissions'));
     }
+
+    public function destroy(Request $request)
+    {
+        Role::whereIn('id', explode('_', $request->role_ids))->delete();
+        return back()->with('success', 'Success to delete');
+    }
+
+    public function update(Request $request, Role $role)
+    {
+        $role->update([
+            'name' => $request->name
+        ]);
+        foreach ($role->permissions as $permission) {
+            $role->revokePermissionTo($permission);
+        }
+        foreach ($request->permissions as $permission) {
+            $role->givePermissionTo($permission);
+        }
+
+        return back()->with('success', 'You have updated the info!');
+    }
 }

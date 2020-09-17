@@ -12,15 +12,15 @@
         <section id="admin-tool-bar" class="mt-5 mb-2">
             <ul class="nav">
                 <li class="nav-item active">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.roles.destroy')}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-secondary btn-sm" id="mass_delete_btn"
-                            onclick="return confirm('Are you sure you want to delete these users?')">
+                            onclick="return confirm('Are you sure you want to delete these roles?')">
                             <i class="far fa-trash-alt"></i>
                             Mass delete
                         </button>
-                        <input type="hidden" name="user_ids" value="" id="user_ids">
+                        <input type="hidden" name="role_ids" value="" id="role_ids">
                     </form>
                 </li>
 
@@ -39,7 +39,7 @@
             <tbody>
                 @foreach($roles as $role)
                 <tr>
-                    <td><input type="checkbox" name="user" value="" class="selected-ids"></td>
+                    <td><input type="checkbox" name="role" value="{{$role->id}}" class="selected-ids"></td>
                     <th scope="row">{{$role->id}}</th>
 
                     <td><a href="">{{$role->name}}</a></td>
@@ -52,15 +52,16 @@
                         @endforeach
                     </td>
                     <td>
-                        <button class="btn edit_btn">
+                        <button class="btn edit_btn" data-role="{{json_encode($role->toArray())}}">
                             <i class="far fa-edit text-success"></i>
                         </button>
 
-                        <form method="POST" action="'" class="d-inline">
+                        <form method="POST" action="{{route('admin.roles.destroy', ['role_ids'=>$role->id])}}"
+                            class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button class="btn" type="submit"
-                                onclick="return confirm('Are you sure you want to delete this user?')">
+                                onclick="return confirm('Are you sure you want to delete this role?')">
                                 <i class="far fa-trash-alt text-danger"></i>
                             </button>
                         </form>
@@ -100,9 +101,40 @@
         filterPanel.show()
     })
 
+    var selectedIds = []
 
+    $('.selected-ids').change(function (e) {
+        if ($(this).is(":checked")) {
+            selectedIds.push($(this).val())
+        } else {
+            var selectedId = $(this).val()
+            selectedIds = selectedIds.filter(function (id) { return id !== selectedId })
+        }
 
+        $('#role_ids').val(selectedIds.join('_'))
+    })
 
+    $('.edit_btn').click(function () {
+        var role = $(this).data('role')
+        createPanel.hide()
+        filterPanel.hide()
+        editPanel.show()
+        console.log(role)
+        $('#role_name').val(role.name)
 
+        var permissionsIds = role.permissions.map(function (permission) {
+            return permission.id
+        })
+
+        $("input[name='permissions[]']").each(function () {
+            if (permissionsIds.indexOf(Number($(this).val())) > -1) {
+                $(this).prop('checked', true)
+            } else {
+                $(this).prop('checked', false)
+            }
+        })
+
+        $('#edit_form').attr('action', '/admin/roles/' + role.id)
+    })
 </script>
 @endsection
