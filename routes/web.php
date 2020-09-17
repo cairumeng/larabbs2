@@ -31,8 +31,15 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::post('users', 'UsersController@show')->name('users.show');
     Route::patch('users/{user}', 'UsersController@update')->name('users.update');
     Route::delete('users', 'UsersController@destroy')->name('users.destroy');
+
     Route::get('roles', 'RolesController@index')->name('roles.index');
     Route::post('roles', 'RolesController@store')->name('roles.store');
     Route::post('roles/search', 'RolesController@show')->name('roles.show');
+    Route::delete('roles', 'RolesController@destroy')->name('roles.destroy');
+    Route::patch('roles/{role}', 'RolesController@update')->name('roles.update');
     Route::get('permissions', 'PermissionsController@index')->name('permissions.index');
+    Route::post('permissions', 'PermissionsController@store')->name('permissions.store');
+    Route::delete('permissions', 'PermissionsController@destroy')->name('permissions.destroy');
+    Route::post('permissions/search', 'PermissionsController@show')->name('permissions.show');
+    Route::patch('permissions/{permission}', 'PermissionsController@update')->name('permissions.update');
 });

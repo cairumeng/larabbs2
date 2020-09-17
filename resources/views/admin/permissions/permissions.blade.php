@@ -3,24 +3,24 @@
 <div class="row">
     <div class="col-8 main-box">
         <section id="admin-title" class="mt-3">
-            <h1 class="d-inline">Roles</h1>
+            <h1 class="d-inline">Permissions</h1>
             <div class="float-right">
-                <button class="btn btn-success" id="create_btn">Role Create</button>
+                <button class="btn btn-success" id="create_btn">Permission Create</button>
                 <button class="btn btn-primary" id="filter_btn">Filter</button>
             </div>
         </section>
         <section id="admin-tool-bar" class="mt-5 mb-2">
             <ul class="nav">
                 <li class="nav-item active">
-                    <form action="{{route('admin.roles.destroy')}}" method="POST">
+                    <form action="" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-secondary btn-sm" id="mass_delete_btn"
-                            onclick="return confirm('Are you sure you want to delete these roles?')">
+                            onclick="return confirm('Are you sure you want to delete these permissions?')">
                             <i class="far fa-trash-alt"></i>
                             Mass delete
                         </button>
-                        <input type="hidden" name="role_ids" value="" id="role_ids">
+                        <input type="hidden" name="permission_ids" value="" id="permission_ids">
                     </form>
                 </li>
 
@@ -31,37 +31,29 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">#ID</th>
-                    <th scope="col">role</th>
-                    <th scope="col">rights</th>
+                    <th scope="col">permission</th>
                     <th scope="col">management</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($roles as $role)
+                @foreach($permissions as $permission)
                 <tr>
-                    <td><input type="checkbox" name="role" value="{{$role->id}}" class="selected-ids"></td>
-                    <th scope="row">{{$role->id}}</th>
+                    <td><input type="checkbox" name="permission" value="{{$permission->id}}" class="selected-ids"></td>
+                    <th scope="row">{{$permission->id}}</th>
 
-                    <td><a href="">{{$role->name}}</a></td>
+                    <td><a href="">{{$permission->name}}</a></td>
                     <td>
-                        @foreach($role->permissions as $rolePermission)
-                        {{$rolePermission->name}}
-                        @if(!$loop->last)
-                        |
-                        @endif
-                        @endforeach
-                    </td>
-                    <td>
-                        <button class="btn edit_btn" data-role="{{json_encode($role->toArray())}}">
+                        <button class="btn edit_btn" data-permission="{{json_encode($permission->toArray())}}">
                             <i class="far fa-edit text-success"></i>
                         </button>
 
-                        <form method="POST" action="{{route('admin.roles.destroy', ['role_ids'=>$role->id])}}"
+                        <form method="POST"
+                            action="{{route('admin.permissions.destroy',['permission_ids'=>$permission->id])}}"
                             class="d-inline">
                             @csrf
                             @method('DELETE')
                             <button class="btn" type="submit"
-                                onclick="return confirm('Are you sure you want to delete this role?')">
+                                onclick="return confirm('Are you sure you want to delete this permission?')">
                                 <i class="far fa-trash-alt text-danger"></i>
                             </button>
                         </form>
@@ -72,9 +64,9 @@
         </table>
     </div>
     <div class="col-4 management-box">
-        @include('admin.roles._create_panel')
-        @include('admin.roles._filter_panel')
-        @include('admin.roles._edit_panel')
+        @include('admin.permissions._create_panel')
+        @include('admin.permissions._filter_panel')
+        @include('admin.permissions._edit_panel')
     </div>
 </div>
 </div>
@@ -95,14 +87,7 @@
         createPanel.show()
     })
 
-    filterButton.click(function () {
-        editPanel.hide()
-        createPanel.hide()
-        filterPanel.show()
-    })
-
     var selectedIds = []
-
     $('.selected-ids').change(function (e) {
         if ($(this).is(":checked")) {
             selectedIds.push($(this).val())
@@ -111,29 +96,23 @@
             selectedIds = selectedIds.filter(function (id) { return id !== selectedId })
         }
 
-        $('#role_ids').val(selectedIds.join('_'))
+        $('#permission_ids').val(selectedIds.join('_'))
+    })
+
+    filterButton.click(function () {
+        editPanel.hide()
+        createPanel.hide()
+        filterPanel.show()
     })
 
     $('.edit_btn').click(function () {
-        var role = $(this).data('role')
+        var permission = $(this).data('permission')
         createPanel.hide()
         filterPanel.hide()
         editPanel.show()
-        $('#role_name').val(role.name)
-
-        var permissionsIds = role.permissions.map(function (permission) {
-            return permission.id
-        })
-
-        $("input[name='permissions[]']").each(function () {
-            if (permissionsIds.indexOf(Number($(this).val())) > -1) {
-                $(this).prop('checked', true)
-            } else {
-                $(this).prop('checked', false)
-            }
-        })
-
-        $('#edit_form').attr('action', '/admin/roles/' + role.id)
+        $('#permission_name').val(permission.name)
+        $('#edit_form').attr('action', '/admin/permissions/' + permission.id)
     })
+
 </script>
 @endsection

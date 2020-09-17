@@ -28,8 +28,15 @@ class PermissionsController extends Controller
 
     public function show(Request $request)
     {
-        dd(111);
         $permissions = Permission::where('id', $request->id)->paginate(20);
         return view('admin.permissions.permissions', compact('permissions'));
+    }
+
+    public function update(Request $request, Permission $permission)
+    {
+        $permission->update([
+            'name' => $request->name
+        ]);
+        return back()->with('success', 'You have updated the info!');
     }
 }

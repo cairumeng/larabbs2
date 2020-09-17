@@ -3,7 +3,7 @@
         <div class="card-header text-center">
             <h5>Edit Panel</h5>
         </div>
-        <form method="POST" action="" enctype="multipart/form-data" id="edit_form">
+        <form method="POST" action="{{route('admin.users.update')}}" enctype="multipart/form-data" id="edit_form">
             @csrf
             @method('patch')
             <div class="form-group mb-5 mt-5">
