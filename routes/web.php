@@ -42,4 +42,19 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::delete('permissions', 'PermissionsController@destroy')->name('permissions.destroy');
     Route::post('permissions/search', 'PermissionsController@show')->name('permissions.show');
     Route::patch('permissions/{permission}', 'PermissionsController@update')->name('permissions.update');
+
+
+
+    Route::get('categories', 'CategoriesController@index')->name('categories.index');
+    Route::post('categories', 'CategoriesController@store')->name('categories.store');
+    Route::delete('categories', 'CategoriesController@destroy')->name('categories.destroy');
+    Route::post('categories/search', 'CategoriesController@show')->name('categories.show');
+    Route::patch('categories/{category}', 'CategoriesController@update')->name('categories.update');
+
+
+    Route::get('topics', 'TopicsController@index')->name('topics.index');
+    Route::post('topics', 'TopicsController@store')->name('topics.store');
+    Route::delete('topics', 'TopicsController@destroy')->name('topics.destroy');
+    Route::post('topics/search', 'TopicsController@show')->name('topics.show');
+    Route::patch('topics/{topic}', 'TopicsController@update')->name('topics.update');
 });

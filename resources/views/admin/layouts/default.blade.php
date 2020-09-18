@@ -37,6 +37,17 @@
                         <a class="dropdown-item" href="{{route('admin.permissions.index')}}">Permissions</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown">
+                        Content management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{route('admin.categories.index')}}">Categories</a>
+                        <a class="dropdown-item" href="{{route('admin.topics.index')}}">Topics</a>
+                        <a class="dropdown-item" href="">Replies</a>
+                    </div>
+                </li>
             </ul>
     </nav>
     <main class="container">
