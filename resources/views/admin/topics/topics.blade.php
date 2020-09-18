@@ -120,6 +120,25 @@
 
         $('#topic_ids').val(selectedIds.join('_'))
     })
+    filterButton.click(function () {
+        editPanel.hide()
+        createPanel.hide()
+        filterPanel.show()
+    })
+
+    $('.edit_btn').click(function () {
+        var topic = $(this).data('topic')
+        createPanel.hide()
+        filterPanel.hide()
+        editPanel.show()
+
+        $('#title').val(topic.title)
+        $('#category').val(topic.category.id)
+        $('#author').val(topic.user.id)
+        $('#body').val(topic.body)
+
+        $('#edit_form').attr('action', '/admin/topics/' + topic.id)
+    })
 
 </script>
 @endsection
