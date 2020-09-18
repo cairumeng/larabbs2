@@ -23,6 +23,10 @@
                         <input type="hidden" name="topic_ids" value="" id="topic_ids">
                     </form>
                 </li>
+                </li>
+                <li class="nav-item ml-4">
+                    <div class="mt-1">Current pages: {{$topics->currentPage()}}/{{$topics->lastPage()}}</div>
+                </li>
 
             </ul>
         </section>
@@ -69,6 +73,10 @@
             </tbody>
         </table>
     </div>
+    <div class="mt-3 mb-5">
+        {{$topics->links()}}
+    </div>
+
     <div class="col-4 management-box">
         @include('admin.topics._create_panel')
         @include('admin.topics._filter_panel')
@@ -76,4 +84,23 @@
     </div>
 </div>
 </div>
+@endsection
+
+
+@section('scripts')
+<script>
+    var createButton = $('#create_btn')
+    var filterButton = $('#filter_btn')
+
+    var createPanel = $('#create_panel')
+    var editPanel = $('#edit_panel')
+    var filterPanel = $('#filter_panel')
+
+    createButton.click(function () {
+        editPanel.hide()
+        filterPanel.hide()
+        createPanel.show()
+    })
+
+</script>
 @endsection
