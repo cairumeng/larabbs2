@@ -12,7 +12,7 @@
         <section id="admin-tool-bar" class="mt-5 mb-2">
             <ul class="nav">
                 <li class="nav-item active">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.permissions.destroy')}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-secondary btn-sm" id="mass_delete_btn"

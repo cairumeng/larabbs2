@@ -12,7 +12,7 @@
         <section id="admin-tool-bar" class="mt-5 mb-2">
             <ul class="nav">
                 <li class="nav-item active">
-                    <form action="" method="POST">
+                    <form action="{{route('admin.topics.destroy')}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-secondary btn-sm" id="mass_delete_btn"
@@ -72,10 +72,11 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="mt-3 mb-5">
+            {{$topics->links()}}
+        </div>
     </div>
-    <div class="mt-3 mb-5">
-        {{$topics->links()}}
-    </div>
+
 
     <div class="col-4 management-box">
         @include('admin.topics._create_panel')
@@ -100,6 +101,24 @@
         editPanel.hide()
         filterPanel.hide()
         createPanel.show()
+    })
+
+    filterButton.click(function () {
+        editPanel.hide()
+        createPanel.hide()
+        filterPanel.show()
+    })
+
+    var selectedIds = []
+    $('.selected-ids').change(function (e) {
+        if ($(this).is(":checked")) {
+            selectedIds.push($(this).val())
+        } else {
+            var selectedId = $(this).val()
+            selectedIds = selectedIds.filter(function (id) { return id !== selectedId })
+        }
+
+        $('#topic_ids').val(selectedIds.join('_'))
     })
 
 </script>

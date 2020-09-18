@@ -37,8 +37,21 @@ class TopicsController extends Controller
 
     public function show(Request $request)
     {
-        $topics = Topic::where('id', $request->id)->paginate(20);
-        return view('admin.topics.topics', compact('topics'));
+        $users = User::all();
+        $categories = Category::all();
+
+        $query = Topic::query();
+        if ($request->id) {
+            $query->where('id', $request->id);
+        }
+        if ($request->author) {
+            $query->Where('user_id', $request->author);
+        }
+        if ($request->category) {
+            $query->Where('category_id', $request->category);
+        }
+        $topics = $query->paginate(20);
+        return view('admin.topics.topics', compact('topics', 'users', 'categories'));
     }
 
     public function update(Request $request, Topic $topic)
